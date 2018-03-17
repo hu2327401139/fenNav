@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/mdui.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #parent {
+            min-width: 900px;
+            height: 600px;
+        }
+
+        #head {
+            position: relative;
+            top: 10%;
+        }
+
+        #head-logo {
+            height: 40px;
+            width: 113.078px;
+            margin: 0 auto;
+        }
+
+        /*头部Logo*/
+        #head-logo a {
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+            font-weight: 200;
+            font-size: 35px;
+            height: 100%;
+
+        }
+
+        /*头部表单*/
+
+        /*搜索框*/
+        #head-form {
+            margin: 0 28%;
+            padding: 0 0.5%;
+            text-align: center;
+            height: 60px;
+            width: 543.563px;
+        }
+
+        #form-father {
+            width: 100%;
+        }
+
+        #form-text {
+            display: inline-block;
+            width: 350px;
+            height: 100%;
+        }
+
+        #form-text .mdui-textfield {
+            overflow: inherit;
+        }
+
+        /*选择搜索引擎*/
+        #form-use-search {
+            margin-top: 16px;
+            margin-bottom: 7px;
+            display: inline-block;
+
+        }
+
+        /*搜索按钮*/
+        #form-submit {
+            display: inline-block;
+            margin-top: 16px;
+            margin-bottom: 7px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/mdui.js"></script>
+
+<div id="parent" class="mdui-container">
+
+    <div id="head">
+
+        <!-- 头部Logo -->
+        <div id="head-logo"><a href="#">楓·导航</a></div>
+
+        <!-- 头部表单 -->
+        <div id="head-form">
+
+            <div id="form-father">
+
+
+                <!-- 选择搜索引擎 -->
+                <div id="form-use-search">
+                    <select v-model="searchEngine " class="mdui-select" mdui-select>
+                        <option value="https://www.baidu.com/#ie=UTF-8&wd=">百度</option>
+                        <option value="">谷歌</option>
+                        <option value="https://cn.bing.com/search?q=">必应</option>
+                    </select>
+                </div>
+
+                <!-- 搜索框 -->
+                <div id="form-text">
+                    <div class="mdui-textfield">
+                        <input v-model="searchText" type="text" class="mdui-textfield-input" placeholder="输入搜索内容"/>
+                    </div>
+                </div>
+
+                <!-- 搜索按钮 -->
+                <div id="form-submit">
+                    <button v-on:click="search(searchEngine,searchText)" type="button" class="mdui-btn mdui-btn-raised mdui-ripple">搜索</button>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    var vm=new Vue({
+        el: '#parent',
+        data: {
+            searchText: '',//搜索内容
+            searchEngine:'https://www.baidu.com/#ie=UTF-8&wd='
+        },
+        methods:{
+            search:function (searchEngine,searchText) {
+
+                var zz=/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+
+                if (zz.test(searchText)){
+                    window.open(searchText);
+                }else{
+                    var sou=searchEngine+searchText;
+                    window.open(sou);
+                }
+
+
+            }
+        }
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>
