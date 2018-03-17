@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=yes">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="css/mdui.css">
 
@@ -27,7 +28,7 @@
 
         #head-logo {
             height: 40px;
-            width: 113.078px;
+            width: 135px;
             margin: 0 auto;
         }
 
@@ -39,7 +40,24 @@
             font-weight: 200;
             font-size: 35px;
             height: 100%;
+            color: #000;
+        }
 
+        #head-logo a span{
+            opacity: 1;
+            animation: shan 0.8s infinite;
+        }
+
+        @keyframes shan {
+            0%{
+                opacity: 1;
+            }
+            50%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 1;
+            }
         }
 
         /*头部表单*/
@@ -49,7 +67,7 @@
             margin: 0 28%;
             padding: 0 0.5%;
             text-align: center;
-            height: 60px;
+            height: 100%;
             width: 543.563px;
         }
 
@@ -86,7 +104,7 @@
     </style>
 
 </head>
-<body>
+<body class="mdui-theme-accent-blue">
 
 <script type="text/javascript" src="js/vue.js"></script>
 <script type="text/javascript" src="js/mdui.js"></script>
@@ -95,20 +113,20 @@
 
     <div id="head">
 
-        <!-- 头部Logo -->
-        <div id="head-logo"><a href="#">楓·导航</a></div>
-
         <!-- 头部表单 -->
         <div id="head-form">
 
-            <div id="form-father">
+            <!-- 头部Logo -->
+            <div id="head-logo"><a href="index.html">楓·导航<span> |</span></a></div>
 
+            <!-- 表单 -->
+            <div id="form-father">
 
                 <!-- 选择搜索引擎 -->
                 <div id="form-use-search">
                     <select v-model="searchEngine " class="mdui-select" mdui-select>
                         <option value="https://www.baidu.com/#ie=UTF-8&wd=">百度</option>
-                        <option value="">谷歌</option>
+<!--                        <option value="">谷歌</option>-->
                         <option value="https://cn.bing.com/search?q=">必应</option>
                     </select>
                 </div>
@@ -116,7 +134,7 @@
                 <!-- 搜索框 -->
                 <div id="form-text">
                     <div class="mdui-textfield">
-                        <input v-model="searchText" type="text" class="mdui-textfield-input" placeholder="输入搜索内容"/>
+                        <input v-on:keyup.enter="search(searchEngine,searchText)" v-model="searchText" type="text" class="mdui-textfield-input" placeholder="输入搜索内容"/>
                     </div>
                 </div>
 
@@ -142,6 +160,7 @@
             searchEngine:'https://www.baidu.com/#ie=UTF-8&wd='
         },
         methods:{
+            //提交搜索
             search:function (searchEngine,searchText) {
 
                 var zz=/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
@@ -153,13 +172,11 @@
                     window.open(sou);
                 }
 
+                this.searchText='';
 
             }
         }
     });
-
-
-
 
 </script>
 
