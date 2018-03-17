@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
+    <link rel="Shortcut Icon" href="favicon.ico" />
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=2.0, user-scalable=yes">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="css/mdui.css">
 
     <style>
+
+        /*margin-left:calc(100% - 15%)*/
+
+        @media screen and(max-width: 900px){
+            #head{
+                margin-left: 0;
+            }
+        }
+
+
         * {
             margin: 0;
             padding: 0;
@@ -16,12 +27,16 @@
             text-decoration: none;
         }
 
+        li{
+            list-style: none;
+        }
+
         #parent {
             min-width: 900px;
             height: 600px;
         }
 
-        #head {
+        #nav-father{
             position: relative;
             top: 10%;
         }
@@ -37,7 +52,7 @@
             text-align: center;
             display: inline-block;
             width: 100%;
-            font-weight: 200;
+            font-weight: normal;
             font-size: 35px;
             height: 100%;
             color: #000;
@@ -45,7 +60,7 @@
 
         #head-logo a span{
             opacity: 1;
-            animation: shan 0.8s infinite;
+            animation: shan 0.85s infinite;
         }
 
         @keyframes shan {
@@ -92,13 +107,54 @@
             display: inline-block;
 
         }
-
         /*搜索按钮*/
         #form-submit {
             display: inline-block;
             margin-top: 16px;
             margin-bottom: 7px;
         }
+
+
+        /*内容*/
+        #content{
+            margin-top: 35px;
+        }
+        #content-father{
+            background: white;
+            width: 884.813px;
+            margin: 0 15%;
+        }
+
+        #content-head{
+
+        }
+        #content-head span{
+            display: inline-block;
+            text-align: center;
+            font-weight: normal;
+            font-family: "微软雅黑";
+            font-size: 16px;
+            color: black;
+            margin-top: 12px;
+            margin-left: 15px;
+            margin-bottom: 12px;
+        }
+
+        #content-website{
+            margin: 8px 0;
+        }
+        #content-website ul li{
+            height: 90px;
+            width: 70px;
+            display: inline-block;
+            margin: 0 10px;
+            text-align: center;
+        }
+        #content-website ul li a>div{
+            margin-top: 5px;
+            color: black;
+        }
+
 
 
     </style>
@@ -109,50 +165,85 @@
 <script type="text/javascript" src="js/vue.js"></script>
 <script type="text/javascript" src="js/mdui.js"></script>
 
-<div id="parent" class="mdui-container">
+    <div id="parent" class="mdui-container">
 
-    <div id="head">
+        <div id="nav-father">
 
-        <!-- 头部表单 -->
-        <div id="head-form">
+            <div id="head">
 
-            <!-- 头部Logo -->
-            <div id="head-logo"><a href="index.html">楓·导航<span> |</span></a></div>
+                <!-- 头部表单 -->
+                <div id="head-form">
 
-            <!-- 表单 -->
-            <div id="form-father">
+                    <!-- 头部Logo -->
+                    <div id="head-logo"><a href="index.html">楓·导航<span>&nbsp;|</span></a></div>
 
-                <!-- 选择搜索引擎 -->
-                <div id="form-use-search">
-                    <select v-model="searchEngine " class="mdui-select" mdui-select>
-                        <option value="https://www.baidu.com/#ie=UTF-8&wd=">百度</option>
-<!--                        <option value="">谷歌</option>-->
-                        <option value="https://cn.bing.com/search?q=">必应</option>
-                    </select>
-                </div>
+                    <!-- 表单 -->
+                    <div id="form-father">
 
-                <!-- 搜索框 -->
-                <div id="form-text">
-                    <div class="mdui-textfield">
-                        <input v-on:keyup.enter="search(searchEngine,searchText)" v-model="searchText" type="text" class="mdui-textfield-input" placeholder="输入搜索内容"/>
+                        <!-- 选择搜索引擎 -->
+                        <div id="form-use-search">
+                            <select v-model="searchEngine " class="mdui-select" mdui-select>
+                                <option value="https://www.baidu.com/#ie=UTF-8&wd=">百度</option>
+                                <!--                        <option value="">谷歌</option>-->
+                                <option value="https://cn.bing.com/search?q=">必应</option>
+                            </select>
+                        </div>
+
+                        <!-- 搜索框 -->
+                        <div id="form-text">
+                            <div class="mdui-textfield">
+                                <input v-on:keyup.enter="search(searchEngine,searchText)" v-model="searchText" type="text" class="mdui-textfield-input" placeholder="输入搜索内容"/>
+                            </div>
+                        </div>
+
+                        <!-- 搜索按钮 -->
+                        <div id="form-submit">
+                            <button v-on:click="search(searchEngine,searchText)" type="button" class="mdui-btn mdui-btn-raised mdui-ripple">搜索</button>
+                        </div>
+
+
                     </div>
+
                 </div>
 
-                <!-- 搜索按钮 -->
-                <div id="form-submit">
-                    <button v-on:click="search(searchEngine,searchText)" type="button" class="mdui-btn mdui-btn-raised mdui-ripple">搜索</button>
+            </div>
+
+            <div id="content">
+                <div id="content-father" class="mdui-shadow-3">
+
+                    <div id="content-head" class="mdui-typo">
+                        <span>网站</span>
+                        <div class="mdui-divider"></div>
+                    </div>
+
+                    <div id="content-website">
+                        <ul>
+                            <li v-for=" in ">
+                                <a href="#">
+                                    <img class="mdui-hoverable" width="55px" height="55px" src="images/download.svg" alt="">
+                                    <div>GitHub</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
-
-
             </div>
 
         </div>
 
+
+
     </div>
 
-</div>
+
 
 <script type="text/javascript">
+
+    Vue.component('website',{
+
+    })
+
     var vm=new Vue({
         el: '#parent',
         data: {
