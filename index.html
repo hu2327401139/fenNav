@@ -4,18 +4,18 @@
     <link rel="Shortcut Icon" href="favicon.ico" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=2.0, user-scalable=yes">
-    <title>Title</title>
+    <title>楓的导航</title>
     <link rel="stylesheet" type="text/css" href="css/mdui.css">
 
     <style>
 
         /*margin-left:calc(100% - 15%)*/
 
-        @media screen and(max-width: 900px){
+/*        @media screen and(max-width: 900px){
             #head{
                 margin-left: 0;
             }
-        }
+        }*/
 
 
         * {
@@ -34,6 +34,7 @@
         #parent {
             min-width: 900px;
             height: 600px;
+            width: 100%;
         }
 
         #nav-father{
@@ -79,11 +80,10 @@
 
         /*搜索框*/
         #head-form {
-            margin: 0 28%;
+            margin: 0 20%;
             padding: 0 0.5%;
             text-align: center;
             height: 100%;
-            width: 543.563px;
         }
 
         #form-father {
@@ -121,13 +121,9 @@
         }
         #content-father{
             background: white;
-            width: 884.813px;
             margin: 0 15%;
         }
 
-        #content-head{
-
-        }
         #content-head span{
             display: inline-block;
             text-align: center;
@@ -155,8 +151,22 @@
             color: black;
         }
 
+        #content-website ul li a>img{
+            object-fit: cover;
+        }
 
-
+/*        footer{
+            background: black;
+            position: relative;
+            bottom: 0;
+            height: 75px;
+            width: 100%;
+            color: white;
+        }
+        footer div{
+            background: #1de9b6;
+            margin: 30px auto;
+        }*/
     </style>
 
 </head>
@@ -169,6 +179,7 @@
 
         <div id="nav-father">
 
+            <!-- 搜索 -->
             <div id="head">
 
                 <!-- 头部表单 -->
@@ -208,27 +219,43 @@
 
             </div>
 
+            <!-- 网站 -->
             <div id="content">
                 <div id="content-father" class="mdui-shadow-3">
 
+                    <!-- 分割线上边 -->
                     <div id="content-head" class="mdui-typo">
                         <span>网站</span>
                         <div class="mdui-divider"></div>
                     </div>
 
+                    <!-- 分割线下边 -->
                     <div id="content-website">
                         <ul>
-                            <li v-for=" in ">
+                            <website v-for="websiteItem in websiteList" v-bind:todo="websiteItem">
+
+                            </website>
+<!--
+
+                            <li v-for="website in ">
                                 <a href="#">
                                     <img class="mdui-hoverable" width="55px" height="55px" src="images/download.svg" alt="">
                                     <div>GitHub</div>
                                 </a>
-                            </li>
+                            </li>-->
+
+
                         </ul>
                     </div>
 
                 </div>
             </div>
+
+<!--            &lt;!&ndash; 页脚 &ndash;&gt;
+            <footer>
+                <div>QQ</div>
+
+            </footer>-->
 
         </div>
 
@@ -236,21 +263,23 @@
 
     </div>
 
-
-
 <script type="text/javascript">
 
     Vue.component('website',{
-
+        props:['todo'],
+        template:'<li><a target="_blank" :href="todo.websiteUrl"><img class="mdui-hoverable" width="55px" height="55px" :src="todo.iconUrl" alt=""><div>{{todo.websiteName}}</div></a></li>'
     })
 
     var vm=new Vue({
         el: '#parent',
         data: {
             searchText: '',//搜索内容
-            searchEngine:'https://www.baidu.com/#ie=UTF-8&wd='
+            searchEngine:'https://www.baidu.com/#ie=UTF-8&wd=',
+            websiteList:[
+                {iconUrl:'https://cn.vuejs.org/images/logo.png', websiteUrl:'https://cn.vuejs.org/v2/guide/', websiteName:'Vue'},
+            ]
         },
-        methods:{
+        methods: {
             //提交搜索
             search:function (searchEngine,searchText) {
 
